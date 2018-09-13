@@ -1,7 +1,8 @@
-package com.robertovecchio.done
+package com.robertovecchio.done.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.robertovecchio.done.R
 
 class MainActivity : AppCompatActivity() {
 

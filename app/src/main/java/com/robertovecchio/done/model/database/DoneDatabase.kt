@@ -31,6 +31,6 @@ abstract class DoneDatabase: RoomDatabase() {
         fun destroyInstance() {
             INSTANCE = null
         }
-        
+
     }
 }

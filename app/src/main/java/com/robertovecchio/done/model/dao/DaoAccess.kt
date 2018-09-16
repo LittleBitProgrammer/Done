@@ -35,9 +35,9 @@ interface DaoAccess {
     @Query("SELECT * FROM TASK")
     fun retrieveAllTask(): List<Task>
 
-    @Query("SELECT * FROM TAG WHERE tagId = :tagId")
+    /*@Query("SELECT * FROM TAG WHERE tagId = :tagId")
     fun retrieveTagById(tagId: Int): Tag
 
     @Query("SELECT * FROM TAG")
-    fun retrieveAllTag(): List<Task>
+    fun retrieveAllTag(): List<Task>*/
 }

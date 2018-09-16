@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Done</string>
+
+    //BOTTOM_bar
+    <string name="home_section">Home</string>
+    <string name="history_section">History</string>
+
 </resources>

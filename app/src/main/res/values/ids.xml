@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //SPLASH_SCREEN
+    <item name="IMAGE.SPLASH.SCREEN" type="id"/>
+    <item name="TEXT.POWERED.BY" type="id"/>
+    <item name="TEXT.NAME.SPLASH" type="id"/>
+
+</resources>

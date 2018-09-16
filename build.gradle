@@ -1,7 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.61'
+    ext.kotlin_version = '1.2.70'
+    ext.butter_knife = '8.8.1'
+    ext.bottom_navigation = '2.2.0'
+    ext.anko_version = '0.10.5'
     repositories {
         google()
         jcenter()

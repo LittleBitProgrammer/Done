@@ -6,13 +6,12 @@ import android.os.Handler
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import com.robertovecchio.done.R
-import com.robertovecchio.done.view.anko.SplashLayout
+import com.robertovecchio.done.view.anko.splash.SplashLayout
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.ctx
 
@@ -83,7 +82,7 @@ class SplashScreen: AppCompatActivity() {
                 .setInterpolator(DecelerateInterpolator(1.2F))
                 .withEndAction {
                     Handler().postDelayed({
-                        startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+                        startActivity(Intent(this@SplashScreen, Subscribe::class.java))
                         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
                     },50)
                 }

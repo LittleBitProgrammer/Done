@@ -1,29 +1,32 @@
-package com.robertovecchio.done.view.fragment
+package com.robertovecchio.done.view.fragment.subscribe
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.robertovecchio.done.model.interfaces.OnReselectedDelegate
-import com.robertovecchio.done.view.anko.HomeLayout
+import android.widget.EditText
+import com.robertovecchio.done.view.anko.subscribe.pages.NameChooserLayout
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.support.v4.ctx
 
-class HomeFragment: Fragment(), OnReselectedDelegate {
+class NameChooser: Fragment() {
 
-    private lateinit var mainUI: HomeLayout
+    private lateinit var mainUI: NameChooserLayout
 
     private lateinit var viewUI: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mainUI = NameChooserLayout()
 
-        mainUI = HomeLayout()
         viewUI = mainUI.createView(AnkoContext.create(ctx,this))
+
+        _editName = mainUI.editName
 
         return viewUI
     }
-    override fun onReselected() {
-        //nothing for now
+
+    companion object {
+        lateinit var _editName: EditText
     }
 }

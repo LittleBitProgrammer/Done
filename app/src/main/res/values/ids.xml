@@ -6,4 +6,9 @@
     <item name="TEXT.POWERED.BY" type="id"/>
     <item name="TEXT.NAME.SPLASH" type="id"/>
 
+    //SUBSCRIBE_HOST
+    <item name="IMAGE.VIEW.LOGO" type="id"/>
+    <item name="FRAME.CONTAINER" type="id"/>
+    <item name="BUTTON.SUBSCRIBE" type="id"/>
+
 </resources>

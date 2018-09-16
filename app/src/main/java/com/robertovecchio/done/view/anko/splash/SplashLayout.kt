@@ -1,12 +1,10 @@
-package com.robertovecchio.done.view.anko
+package com.robertovecchio.done.view.anko.splash
 
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
-import android.view.Gravity
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R

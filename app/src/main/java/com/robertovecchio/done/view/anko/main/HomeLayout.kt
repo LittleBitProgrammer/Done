@@ -1,6 +1,6 @@
-package com.robertovecchio.done.view.anko
+package com.robertovecchio.done.view.anko.main
 
-import com.robertovecchio.done.view.fragment.HomeFragment
+import com.robertovecchio.done.view.fragment.main.HomeFragment
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.linearLayout

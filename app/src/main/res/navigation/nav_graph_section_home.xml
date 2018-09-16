@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.robertovecchio.done.view.fragment.HomeFragment"
+        android:name="com.robertovecchio.done.view.fragment.main.HomeFragment"
         android:label="HomeFragment">
 
     </fragment>

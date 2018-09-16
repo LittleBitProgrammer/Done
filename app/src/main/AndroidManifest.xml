@@ -35,6 +35,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.robertovecchio.done.view.activity.Subscribe"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

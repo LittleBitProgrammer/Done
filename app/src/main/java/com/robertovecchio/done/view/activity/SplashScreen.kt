@@ -1,5 +1,6 @@
 package com.robertovecchio.done.view.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -43,6 +44,7 @@ class SplashScreen: AppCompatActivity() {
          textName = mainUI.name
 
          setContentView(viewUi)
+
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -82,8 +84,15 @@ class SplashScreen: AppCompatActivity() {
                 .setInterpolator(DecelerateInterpolator(1.2F))
                 .withEndAction {
                     Handler().postDelayed({
-                        startActivity(Intent(this@SplashScreen, Subscribe::class.java))
-                        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+                        val isFirstRun = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).getBoolean("isFirstRun", true)
+
+                        if (isFirstRun){
+                            startActivity(Intent(this@SplashScreen, Subscribe::class.java))
+                            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+                        }else{
+                            startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+                            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+                        }
                     },50)
                 }
                 .start()

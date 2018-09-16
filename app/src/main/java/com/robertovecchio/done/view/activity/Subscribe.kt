@@ -72,6 +72,8 @@ class Subscribe: AppCompatActivity() {
                     subscribeButton.text = "Fine"
                 }
             }else{
+                getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).edit().putBoolean("isFirstRun", false).apply()
+                
                 startActivity(Intent(this@Subscribe, MainActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
             }

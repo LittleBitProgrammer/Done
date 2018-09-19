@@ -58,7 +58,7 @@ class SplashScreen: AppCompatActivity() {
         super.onWindowFocusChanged(hasFocus)
     }
 
-    fun animate(){
+    private fun animate(){
         centralLogo.y = -1000F
         textPowered.y = 2500F
         textName.y = 2800F

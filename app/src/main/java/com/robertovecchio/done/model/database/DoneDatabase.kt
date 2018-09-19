@@ -9,7 +9,7 @@ import com.robertovecchio.done.model.entity.Tag
 import com.robertovecchio.done.model.entity.Task
 import com.robertovecchio.done.model.entity.User
 
-@Database(entities = [User::class, Task::class, Tag::class], version = 1)
+@Database(entities = [User::class, Task::class, Tag::class], version = 2)
 abstract class DoneDatabase: RoomDatabase() {
 
     abstract fun daoAccess(): DaoAccess

@@ -20,14 +20,17 @@ interface DaoAccess {
     @Insert
     fun insertTag(tag:Tag)
 
+    @Insert
+    fun insertTags(tags: List<Tag>)
+
     @Delete
     fun deleteTask(task: Task)
 
-    @Query("SELECT * FROM USER WHERE userName = :userName")
-    fun retrieveUserByName(userName: String): User
+    @Query("SELECT * FROM USER WHERE id = :id")
+    fun retrieveUserById(id: Int): User
 
     @Query("SELECT * FROM USER")
-    fun retrieveUser(): List<User>
+    fun retrieveUser(): User
 
     @Query("SELECT * FROM TASK WHERE taskId = :taskId")
     fun retrieveTaskById(taskId:Int): Task
@@ -35,9 +38,9 @@ interface DaoAccess {
     @Query("SELECT * FROM TASK")
     fun retrieveAllTask(): List<Task>
 
-    /*@Query("SELECT * FROM TAG WHERE tagId = :tagId")
+    @Query("SELECT * FROM TAG WHERE tagId = :tagId")
     fun retrieveTagById(tagId: Int): Tag
 
     @Query("SELECT * FROM TAG")
-    fun retrieveAllTag(): List<Task>*/
+    fun retrieveAllTag(): List<Tag>
 }

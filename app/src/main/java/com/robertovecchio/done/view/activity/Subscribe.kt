@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
@@ -14,6 +16,9 @@ import android.widget.Button
 import android.widget.EditText
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
+import com.robertovecchio.done.model.database.DoneDatabase
+import com.robertovecchio.done.model.entity.User
+import com.robertovecchio.done.model.thread.DbWorkerThread
 import com.robertovecchio.done.view.anko.subscribe.host.SubscribeLayout
 import com.robertovecchio.done.view.fragment.subscribe.ImageChooser
 import com.robertovecchio.done.view.fragment.subscribe.ImageChooser.Companion._roundimage
@@ -37,7 +42,14 @@ class Subscribe: AppCompatActivity() {
 
     private lateinit var subscribeButton: Button
 
+    private lateinit var newUser: User
+
     private var isNameLoaded: Boolean = false
+
+    private var myDoneDatabase: DoneDatabase? = null
+
+    private lateinit var mDbWorkerThread: DbWorkerThread
+    private val mUiHandler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +60,13 @@ class Subscribe: AppCompatActivity() {
 
         viewUI = mainUI.createView(AnkoContext.create(ctx,this))
         setContentView(viewUI)
+
+        mDbWorkerThread = DbWorkerThread("dbWorkerThread")
+        mDbWorkerThread.start()
+
+        myDoneDatabase = DoneDatabase.getInstance(this)
+
+        newUser = User()
 
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
@@ -64,6 +83,7 @@ class Subscribe: AppCompatActivity() {
                     _editName.error = "Questo campo non può essere vuoto"
                 }else{
                     isNameLoaded = true
+                    newUser.userName = getString(_editName)
                     fragmentManager!!
                             .beginTransaction()
                             .setCustomAnimations(R.anim.right_enter_animation, R.anim.left_exit_animation)
@@ -73,7 +93,10 @@ class Subscribe: AppCompatActivity() {
                 }
             }else{
                 getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).edit().putBoolean("isFirstRun", false).apply()
-                
+                newUser.image = _pickedImage.toString()
+
+                insertName()
+
                 startActivity(Intent(this@Subscribe, MainActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
             }
@@ -114,12 +137,16 @@ class Subscribe: AppCompatActivity() {
             1 ->
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     // Let's read picked roundedImage data - its URI
-                    val pickedImage = data.data!!
-                    Glide.with(ctx).load(pickedImage).into(_roundimage)
+                    _pickedImage = data.data!!
+                    Glide.with(ctx).load(_pickedImage).into(_roundimage)
                     //val imageStream = contentResolver.openInputStream(pickedImage)
                     //_bitmapSelectedImage = BitmapFactory.decodeStream(imageStream)
                 }
         }
+    }
+
+    companion object {
+        lateinit var _pickedImage: Uri
     }
 
     private fun getString(editText: EditText): String {
@@ -140,5 +167,19 @@ class Subscribe: AppCompatActivity() {
      */
     private fun isEditTextEmpty(editText: EditText): Boolean {
         return editText.length() == 0
+    }
+
+    private fun insertName(){
+        val task = Runnable {
+            myDoneDatabase?.daoAccess()?.insertUser(newUser)
+        }
+
+        mDbWorkerThread.postTask(task)
+    }
+
+    override fun onDestroy() {
+        DoneDatabase.destroyInstance()
+        mDbWorkerThread.quit()
+        super.onDestroy()
     }
 }

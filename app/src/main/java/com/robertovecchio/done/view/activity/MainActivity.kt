@@ -3,6 +3,8 @@ package com.robertovecchio.done.view.activity
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.View
@@ -17,9 +19,16 @@ import com.robertovecchio.done.model.general.or
 import com.robertovecchio.done.model.interfaces.OnReselectedDelegate
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.ctx
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.toast
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
+
+    private var isInsideAdd: Boolean = false
+
+    private val fab: FloatingActionButton by lazy { fabButton }
+    private val confirmFab: FloatingActionButton by lazy { fabButtonConfirm }
 
     private val sectionHomeWrapper: FrameLayout by lazy { section_home_wrapper }
     private val sectionHistoryWrapper: FrameLayout by lazy { section_history_wrapper }
@@ -47,6 +56,8 @@ class MainActivity : AppCompatActivity() {
 
                 sectionHomeWrapper.visibility = View.VISIBLE
                 sectionHistoryWrapper.visibility = View.INVISIBLE
+                fab.visibility = View.VISIBLE
+                confirmFab.visibility = View.VISIBLE
 
                 returnValue = true
             }
@@ -56,12 +67,14 @@ class MainActivity : AppCompatActivity() {
 
                 sectionHomeWrapper.visibility = View.INVISIBLE
                 sectionHistoryWrapper.visibility = View.VISIBLE
+                fab.visibility = View.INVISIBLE
+                confirmFab.visibility = View.INVISIBLE
 
                 returnValue = true
             }
 
         }
-        onReselected(position)
+        //onReselected(position)
         return@OnTabSelectedListener returnValue
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +87,26 @@ class MainActivity : AppCompatActivity() {
 
         sectionHomeWrapper.visibility = View.VISIBLE
         sectionHistoryWrapper.visibility = View.INVISIBLE
+        fab.visibility = View.VISIBLE
+        confirmFab.visibility = View.VISIBLE
+
+        fab.onClick {
+            isInsideAdd = if (!isInsideAdd){
+                Handler().postDelayed({
+                    navHomeController.navigate(R.id.action_home_to_add)
+                    fab.animate().rotation(45F)
+                    confirmFab.animate().translationX(-200F)
+                },0)
+                true
+            }else{
+                Handler().postDelayed({
+                    navHomeController.navigateUp()
+                    fab.animate().rotation(0F)
+                    confirmFab.animate().translationX(0F)
+                },0)
+                false
+            }
+        }
     }
 
     override fun onBackPressed() {

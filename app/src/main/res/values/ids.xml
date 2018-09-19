@@ -11,4 +11,20 @@
     <item name="FRAME.CONTAINER" type="id"/>
     <item name="BUTTON.SUBSCRIBE" type="id"/>
 
+    //HOME
+    <item name="PROFILE.IMAGE" type="id"/>
+    <item name="NAME.TEXT.VIEW" type="id"/>
+    <item name="TASK.LABEL" type="id"/>
+    <item name="LOGO.IMAGE" type="id"/>
+    <item name="NO.TASK" type="id"/>
+    <item name="NO.TASK.TITLE" type="id"/>
+    <item name="NO.TASK.DESCRIPTION" type="id"/>
+    <item name="NO.TASK.TAG" type="id"/>
+    <item name="RECYCLER.MAIN" type="id"/>
+
+    //TAG_RECYCLER
+    <item name="CHECK.BOX" type="id"/>
+    <item name="TAG.NAME" type="id"/>
+    <item name="TAG.COLOR" type="id"/>
+
 </resources>

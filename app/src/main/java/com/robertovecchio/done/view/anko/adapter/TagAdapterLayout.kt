@@ -1,27 +1,39 @@
 package com.robertovecchio.done.view.anko.adapter
 
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
+import android.graphics.Color
+import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.view.ViewManager
 import com.robertovecchio.done.R
+import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.*
+import org.jetbrains.anko.constraint.layout.constraintLayout
+import org.jetbrains.anko.custom.ankoView
+
+inline fun ViewManager.roundImage(theme: Int = 0, init: CircleImageView.() -> Unit) = ankoView({ CircleImageView(it) }, theme, init)
 
 class TagAdapterLayout: AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui){
-        linearLayout {
-            orientation = LinearLayout.HORIZONTAL
+        constraintLayout {
+            topPadding = dip(6)
+            lparams(matchParent, wrapContent)
 
+            checkBox ("Family"){
+                id = R.id.CHECK_BOX
+                textColor = Color.parseColor("#BDBCBF")
+                textSize = 18F
+            }.lparams(width = wrapContent, height = wrapContent){
+                topToTop = PARENT_ID
+            }
+            roundImage {
+                id = R.id.TAG_COLOR
 
-            textView("agagagagagagga"){
-                id = R.id.TAG_NAME
+            }.lparams(dip(16),dip(16)){
+                rightToRight = PARENT_ID
+                topToTop = PARENT_ID
+                bottomToBottom = PARENT_ID
 
-                ViewCompat.setNestedScrollingEnabled(this, false)
-                textColor = android.R.color.white
-                textSize = 14F
-                backgroundColor = ContextCompat.getColor(ctx,android.R.color.black)
-            }.lparams(width = dip(200), height = wrapContent){
-                leftMargin = dip(10)
+                rightMargin = dip(16)
             }
 
         }

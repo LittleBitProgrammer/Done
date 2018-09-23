@@ -1,12 +1,13 @@
 package com.robertovecchio.done.view.activity
 
+import android.Manifest
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
@@ -18,19 +19,16 @@ import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
 import com.robertovecchio.done.model.database.DoneDatabase
 import com.robertovecchio.done.model.entity.User
-import com.robertovecchio.done.model.thread.DbWorkerThread
 import com.robertovecchio.done.view.anko.subscribe.host.SubscribeLayout
 import com.robertovecchio.done.view.fragment.subscribe.ImageChooser
 import com.robertovecchio.done.view.fragment.subscribe.ImageChooser.Companion._roundimage
 import com.robertovecchio.done.view.fragment.subscribe.NameChooser
 import com.robertovecchio.done.view.fragment.subscribe.NameChooser.Companion._editName
+import com.robertovecchio.done.viewmodel.SubscribeViewModel
 import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.contentView
+import org.jetbrains.anko.act
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.support.v4.ctx
-import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 
 class Subscribe: AppCompatActivity() {
 
@@ -46,13 +44,19 @@ class Subscribe: AppCompatActivity() {
 
     private var isNameLoaded: Boolean = false
 
-    private var myDoneDatabase: DoneDatabase? = null
-
-    private lateinit var mDbWorkerThread: DbWorkerThread
-    private val mUiHandler = Handler()
+    private val viewModel: SubscribeViewModel by lazy {
+        ViewModelProviders.of(this).get(SubscribeViewModel(act.application)::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1)
+        ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                2)
 
         fragmentManager = supportFragmentManager
 
@@ -60,11 +64,6 @@ class Subscribe: AppCompatActivity() {
 
         viewUI = mainUI.createView(AnkoContext.create(ctx,this))
         setContentView(viewUI)
-
-        mDbWorkerThread = DbWorkerThread("dbWorkerThread")
-        mDbWorkerThread.start()
-
-        myDoneDatabase = DoneDatabase.getInstance(this)
 
         newUser = User()
 
@@ -170,16 +169,11 @@ class Subscribe: AppCompatActivity() {
     }
 
     private fun insertName(){
-        val task = Runnable {
-            myDoneDatabase?.daoAccess()?.insertUser(newUser)
-        }
-
-        mDbWorkerThread.postTask(task)
+        viewModel.insertUser(newUser)
     }
 
     override fun onDestroy() {
         DoneDatabase.destroyInstance()
-        mDbWorkerThread.quit()
         super.onDestroy()
     }
 }

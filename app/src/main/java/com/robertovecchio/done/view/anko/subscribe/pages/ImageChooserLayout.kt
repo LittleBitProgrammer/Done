@@ -11,16 +11,16 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.fragment.subscribe.ImageChooser
-import com.robertovecchio.done.view.widget.RoundedImageView
+import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-inline fun ViewManager.roundImage(theme: Int = 0, init: RoundedImageView.() -> Unit) = ankoView({ RoundedImageView(it) }, theme, init)
+inline fun ViewManager.roundImage(theme: Int = 0, init: CircleImageView.() -> Unit) = ankoView({ CircleImageView(it) }, theme, init)
 
 class ImageChooserLayout(private val activity: Activity):AnkoComponent<ImageChooser> {
 
-    lateinit var profileImage: RoundedImageView
+    lateinit var profileImage: CircleImageView
 
     override fun createView(ui: AnkoContext<ImageChooser>) = with(ui) {
         linearLayout {

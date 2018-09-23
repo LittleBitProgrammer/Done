@@ -3,7 +3,6 @@ package com.robertovecchio.done.view.anko.main
 import android.graphics.Color
 import android.graphics.Typeface
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.ViewManager
 import android.widget.TextView
@@ -11,18 +10,18 @@ import androidx.core.view.size
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.fragment.main.HomeFragment
-import com.robertovecchio.done.view.widget.RoundedImageView
+import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
 import org.jetbrains.anko.constraint.layout.matchConstraint
 import org.jetbrains.anko.custom.ankoView
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
-inline fun ViewManager.roundImage(theme: Int = 0, init: RoundedImageView.() -> Unit) = ankoView({ RoundedImageView(it) }, theme, init)
+inline fun ViewManager.roundImage(theme: Int = 0, init: CircleImageView.() -> Unit) = ankoView({ CircleImageView(it) }, theme, init)
 
 class HomeLayout: AnkoComponent<HomeFragment> {
 
-    lateinit var image: RoundedImageView
+    lateinit var image: CircleImageView
     lateinit var text: TextView
     lateinit var recycler: RecyclerView
 

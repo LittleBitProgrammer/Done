@@ -61,6 +61,25 @@ dependencies {
     implementation "com.aurelhubert:ahbottomnavigation:$bottom_navigation"
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha05'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha05'
+    implementation "io.reactivex.rxjava2:rxjava:2.0.6"
+
+    // Lifecycle components
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    implementation "android.arch.paging:runtime:1.0.1"
+    implementation 'android.arch.persistence.room:rxjava2:1.1.1'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+    // Test helpers for LiveData
+    testImplementation "android.arch.core:core-testing:1.1.1"
+
+    // Test helpers for Room
+    testImplementation "android.arch.persistence.room:testing:1.1.1"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.24'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     /* ======================================================================
                                                   Anko

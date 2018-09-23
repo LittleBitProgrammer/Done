@@ -1,5 +1,6 @@
 package com.robertovecchio.done.model.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
@@ -27,20 +28,17 @@ interface DaoAccess {
     fun deleteTask(task: Task)
 
     @Query("SELECT * FROM USER WHERE id = :id")
-    fun retrieveUserById(id: Int): User
-
-    @Query("SELECT * FROM USER")
-    fun retrieveUser(): User
+    fun retrieveUserById(id: Int): LiveData<User>
 
     @Query("SELECT * FROM TASK WHERE taskId = :taskId")
-    fun retrieveTaskById(taskId:Int): Task
+    fun retrieveTaskById(taskId:Int): LiveData<Task>
 
     @Query("SELECT * FROM TASK")
-    fun retrieveAllTask(): List<Task>
+    fun retrieveAllTask(): LiveData<List<Task>>
 
     @Query("SELECT * FROM TAG WHERE tagId = :tagId")
-    fun retrieveTagById(tagId: Int): Tag
+    fun retrieveTagById(tagId: Int): LiveData<Tag>
 
     @Query("SELECT * FROM TAG")
-    fun retrieveAllTag(): List<Tag>
+    fun retrieveAllTag(): LiveData<List<Tag>>
 }

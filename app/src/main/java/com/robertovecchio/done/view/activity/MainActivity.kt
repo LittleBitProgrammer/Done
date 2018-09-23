@@ -17,10 +17,11 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.robertovecchio.done.R
 import com.robertovecchio.done.model.general.or
 import com.robertovecchio.done.model.interfaces.OnReselectedDelegate
+import io.reactivex.Completable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.toast
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -91,24 +92,34 @@ class MainActivity : AppCompatActivity() {
         confirmFab.visibility = View.VISIBLE
 
         fab.onClick {
-            isInsideAdd = if (!isInsideAdd){
-                Handler().postDelayed({
-                    navHomeController.navigate(R.id.action_home_to_add)
-                    fab.animate().rotation(45F)
-                    confirmFab.animate().translationX(-200F)
-                },0)
-                true
-            }else{
-                Handler().postDelayed({
-                    navHomeController.navigateUp()
-                    fab.animate().rotation(0F)
-                    confirmFab.animate().translationX(0F)
-                },0)
-                false
-            }
+            Completable.fromAction { doClickEvent() }
+                    .subscribeOn(Schedulers.io())
+                    .subscribe()
         }
     }
 
+    private fun doClickEvent(){
+        isInsideAdd = if (!isInsideAdd){
+                Completable.fromAction {  navHomeController.navigate(R.id.action_home_to_add)}
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe()
+
+                Completable.fromAction {  fab.animate().rotation(45F)
+                confirmFab.animate().translationX(-200F)}
+                        .subscribeOn(Schedulers.io())
+                        .subscribe()
+            true
+        }else{
+            Completable.fromAction { navHomeController.navigateUp()}
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe()
+                Completable.fromAction {  fab.animate().rotation(0F)
+                confirmFab.animate().translationX(0F)}
+                        .subscribeOn(Schedulers.io())
+                        .subscribe()
+            false
+        }
+    }
     override fun onBackPressed() {
         currentController
                 ?.let { if (it.popBackStack().not()) finish() }

@@ -3,10 +3,10 @@ package com.robertovecchio.done.view.adapter
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.ButterKnife
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
@@ -15,9 +15,7 @@ import com.robertovecchio.done.view.anko.adapter.TagAdapterLayout
 import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.uiThread
-import kotlin.concurrent.thread
 
 class TagAdapter(tag: List<Tag>?, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

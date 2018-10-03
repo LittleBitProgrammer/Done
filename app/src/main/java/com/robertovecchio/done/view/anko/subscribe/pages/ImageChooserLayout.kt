@@ -3,18 +3,18 @@ package com.robertovecchio.done.view.anko.subscribe.pages
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.ViewManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.fragment.subscribe.ImageChooser
 import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.ankoView
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 inline fun ViewManager.roundImage(theme: Int = 0, init: CircleImageView.() -> Unit) = ankoView({ CircleImageView(it) }, theme, init)
 

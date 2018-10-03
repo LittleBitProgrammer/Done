@@ -1,14 +1,13 @@
 package com.robertovecchio.done.view.fragment.subscribe
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import com.robertovecchio.done.view.anko.subscribe.pages.NameChooserLayout
 import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.support.v4.ctx
 
 class NameChooser: Fragment() {
 
@@ -19,7 +18,7 @@ class NameChooser: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mainUI = NameChooserLayout()
 
-        viewUI = mainUI.createView(AnkoContext.create(ctx,this))
+        viewUI = mainUI.createView(AnkoContext.create(context!!,this))
 
         _editName = mainUI.editName
 

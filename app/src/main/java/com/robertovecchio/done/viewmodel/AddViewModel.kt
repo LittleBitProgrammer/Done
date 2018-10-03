@@ -1,13 +1,14 @@
 package com.robertovecchio.done.viewmodel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.robertovecchio.done.model.database.DoneDatabase
 import com.robertovecchio.done.model.repository.RepositoryApi
 import com.robertovecchio.done.model.entity.Tag
+import javax.inject.Inject
 
-class AddViewModel constructor(application: Application): AndroidViewModel(application) {
+class AddViewModel @Inject constructor(application: Application): ViewModel() {
 
     private val mRepositoryApi: RepositoryApi = RepositoryApi(application)
     private val allTags: LiveData<List<Tag>>?

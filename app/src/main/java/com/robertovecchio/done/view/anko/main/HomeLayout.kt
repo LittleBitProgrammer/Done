@@ -2,11 +2,11 @@ package com.robertovecchio.done.view.anko.main
 
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
-import android.support.v7.widget.RecyclerView
 import android.view.ViewManager
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
 import androidx.core.view.size
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.fragment.main.HomeFragment

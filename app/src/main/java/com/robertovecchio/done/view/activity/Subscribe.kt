@@ -2,19 +2,19 @@ package com.robertovecchio.done.view.activity
 
 import android.Manifest
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.FragmentManager
-import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
 import com.robertovecchio.done.model.database.DoneDatabase
@@ -26,9 +26,7 @@ import com.robertovecchio.done.view.fragment.subscribe.NameChooser
 import com.robertovecchio.done.view.fragment.subscribe.NameChooser.Companion._editName
 import com.robertovecchio.done.viewmodel.SubscribeViewModel
 import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.act
-import org.jetbrains.anko.ctx
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class Subscribe: AppCompatActivity() {
 
@@ -36,7 +34,7 @@ class Subscribe: AppCompatActivity() {
 
     private lateinit var viewUI: View
 
-    var fragmentManager: FragmentManager? = null
+    private var fragmentManager: FragmentManager? = null
 
     private lateinit var subscribeButton: Button
 
@@ -45,7 +43,7 @@ class Subscribe: AppCompatActivity() {
     private var isNameLoaded: Boolean = false
 
     private val viewModel: SubscribeViewModel by lazy {
-        ViewModelProviders.of(this).get(SubscribeViewModel(act.application)::class.java)
+        ViewModelProviders.of(this).get(SubscribeViewModel(this.application)::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +60,7 @@ class Subscribe: AppCompatActivity() {
 
         mainUI = SubscribeLayout()
 
-        viewUI = mainUI.createView(AnkoContext.create(ctx,this))
+        viewUI = mainUI.createView(AnkoContext.create(this,this))
         setContentView(viewUI)
 
         newUser = User()
@@ -137,7 +135,7 @@ class Subscribe: AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     // Let's read picked roundedImage data - its URI
                     _pickedImage = data.data!!
-                    Glide.with(ctx).load(_pickedImage).into(_roundimage)
+                    Glide.with(this).load(_pickedImage).into(_roundimage)
                     //val imageStream = contentResolver.openInputStream(pickedImage)
                     //_bitmapSelectedImage = BitmapFactory.decodeStream(imageStream)
                 }

@@ -1,9 +1,9 @@
 package com.robertovecchio.done.view.anko.adapter
 
 import android.graphics.Color
-import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.ViewGroup
 import android.view.ViewManager
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
 import com.robertovecchio.done.R
 import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.*

@@ -1,7 +1,7 @@
 package com.robertovecchio.done.model.repository
 
 import android.app.Application
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import com.robertovecchio.done.model.dao.DaoAccess
 import com.robertovecchio.done.model.database.DoneDatabase
 import com.robertovecchio.done.model.entity.Tag

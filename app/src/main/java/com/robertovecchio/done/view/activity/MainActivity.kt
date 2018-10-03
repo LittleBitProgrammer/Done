@@ -1,27 +1,25 @@
 package com.robertovecchio.done.view.activity
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.robertovecchio.done.R
 import com.robertovecchio.done.model.general.or
 import com.robertovecchio.done.model.interfaces.OnReselectedDelegate
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.ctx
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -57,8 +55,8 @@ class MainActivity : AppCompatActivity() {
 
                 sectionHomeWrapper.visibility = View.VISIBLE
                 sectionHistoryWrapper.visibility = View.INVISIBLE
-                fab.visibility = View.VISIBLE
-                confirmFab.visibility = View.VISIBLE
+                fab.show()
+                confirmFab.show()
 
                 returnValue = true
             }
@@ -68,8 +66,8 @@ class MainActivity : AppCompatActivity() {
 
                 sectionHomeWrapper.visibility = View.INVISIBLE
                 sectionHistoryWrapper.visibility = View.VISIBLE
-                fab.visibility = View.INVISIBLE
-                confirmFab.visibility = View.INVISIBLE
+                fab.hide()
+                confirmFab.hide()
 
                 returnValue = true
             }
@@ -88,8 +86,8 @@ class MainActivity : AppCompatActivity() {
 
         sectionHomeWrapper.visibility = View.VISIBLE
         sectionHistoryWrapper.visibility = View.INVISIBLE
-        fab.visibility = View.VISIBLE
-        confirmFab.visibility = View.VISIBLE
+        fab.show()
+        confirmFab.show()
 
         fab.onClick {
             Completable.fromAction { doClickEvent() }
@@ -178,7 +176,7 @@ class MainActivity : AppCompatActivity() {
 
         //bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
 
-        bottomNavigation.defaultBackgroundColor = ContextCompat.getColor(ctx,R.color.colorPrimaryDark)
+        bottomNavigation.defaultBackgroundColor = ContextCompat.getColor(this,R.color.colorPrimaryDark)
         bottomNavigation.setOnTabSelectedListener(mOnNavigationItemSelectedListener)
     }
 }

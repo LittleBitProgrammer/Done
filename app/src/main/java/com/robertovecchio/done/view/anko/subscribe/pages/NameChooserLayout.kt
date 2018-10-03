@@ -2,7 +2,6 @@ package com.robertovecchio.done.view.anko.subscribe.pages
 
 import android.graphics.PorterDuff.Mode.*
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
 import android.text.InputFilter
 import android.text.InputType
 import android.text.method.DigitsKeyListener
@@ -10,10 +9,10 @@ import android.view.Gravity
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.fragment.subscribe.NameChooser
 import org.jetbrains.anko.*
-
 
 
 class NameChooserLayout: AnkoComponent<NameChooser> {

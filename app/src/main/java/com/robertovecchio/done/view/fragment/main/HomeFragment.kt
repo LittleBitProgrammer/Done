@@ -1,71 +1,75 @@
 package com.robertovecchio.done.view.fragment.main
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import com.robertovecchio.done.model.database.DoneDatabase
+import com.robertovecchio.done.model.component.DaggerDoneComponent
 import com.robertovecchio.done.model.entity.Tag
 import com.robertovecchio.done.model.interfaces.OnReselectedDelegate
-import com.robertovecchio.done.view.anko.main.HomeLayout
+import com.robertovecchio.done.model.module.ActivityModule
+import com.robertovecchio.done.model.module.AnkoModule
+import com.robertovecchio.done.model.module.ContextModule
 import com.robertovecchio.done.viewmodel.HomeViewModel
-import org.jetbrains.anko.AnkoContext
+import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.ctx
+import javax.inject.Inject
+import javax.inject.Named
 
 class HomeFragment: Fragment(), OnReselectedDelegate {
 
     private var isDatabaseLoad = false
 
-    private lateinit var mainUI: HomeLayout
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject @field:Named("home") lateinit var viewUI: View
 
-    private lateinit var viewUI: View
-
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProviders.of(this).get(HomeViewModel(act.application)::class.java)
-    }
-
-    private var tags: MutableList<Tag> = mutableListOf()
+    @Inject lateinit var textName: TextView
+    @Inject lateinit var profileImage: CircleImageView
+    @Inject lateinit var tags: MutableList<Tag>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        mainUI = HomeLayout()
-        viewUI = mainUI.createView(AnkoContext.create(ctx,this))
+
+        DaggerDoneComponent.builder()
+                .ankoModule(AnkoModule())
+                .contextModule(ContextModule(ctx))
+                .activityModule(ActivityModule(act))
+                .build()
+                .injectHome(this)
+
+        val vm = ViewModelProviders.of(this,viewModelFactory)[HomeViewModel::class.java]
 
         isDatabaseLoad = act.getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).getBoolean("isDatabaseLoad", true)
 
-        viewModel.retrieveAllTask()?.observe(this,android.arch.lifecycle.Observer { taskItem ->
+        vm.retrieveAllTask()?.observe(this, Observer { taskItem ->
             //set here the adapter
         })
 
-        viewModel.retrievveUserById(1)?.observe(this, android.arch.lifecycle.Observer { activeUser ->
-            mainUI.text.text = activeUser?.userName.toString()
+        vm.retrievveUserById(1)?.observe(this, Observer { activeUser ->
+            textName.text = activeUser?.userName.toString()
             val uri = Uri.parse(activeUser?.image)
-            Glide.with(this).load(uri).into(mainUI.image)
+            Glide.with(this).load(uri).into(profileImage)
         })
 
         if (isDatabaseLoad){
             setTagValue()
-            viewModel.insertTags(tags)
+            vm.insertTags(tags)
             act.getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE).edit().putBoolean("isDatabaseLoad", false).apply()
-            Log.i("TASK", "executed")
         }
 
         return viewUI
     }
     override fun onReselected() {
         //nothing for now
-    }
-
-    override fun onDestroy() {
-        DoneDatabase.destroyInstance()
-        super.onDestroy()
     }
 
     private fun setTagValue(){

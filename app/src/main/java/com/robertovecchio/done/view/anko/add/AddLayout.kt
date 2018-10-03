@@ -2,16 +2,16 @@ package com.robertovecchio.done.view.anko.add
 
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.InputFilter
 import android.text.InputType
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat.*
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.fragment.add.AddFragment
 import org.jetbrains.anko.*
@@ -91,8 +91,8 @@ class AddLayout: AnkoComponent<AddFragment> {
                     leftMargin = dip(18)
                 }
                 tagRecycler = recyclerView {
-                    ViewCompat.setNestedScrollingEnabled(this, false)
-                    this.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
+                    setNestedScrollingEnabled(this, false)
+                    this.layoutManager = LinearLayoutManager(ctx, RecyclerView.VERTICAL, false)
                     this.setHasFixedSize(true)
 
                     val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)

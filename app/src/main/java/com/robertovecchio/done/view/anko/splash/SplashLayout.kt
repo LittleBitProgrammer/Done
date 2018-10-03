@@ -3,9 +3,9 @@ package com.robertovecchio.done.view.anko.splash
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout.LayoutParams.PARENT_ID
 import com.bumptech.glide.Glide
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.activity.SplashScreen

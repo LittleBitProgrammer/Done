@@ -1,7 +1,7 @@
 package com.robertovecchio.done.viewmodel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import com.robertovecchio.done.model.entity.User
 import com.robertovecchio.done.model.repository.RepositoryApi
 

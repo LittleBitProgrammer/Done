@@ -1,17 +1,19 @@
 package com.robertovecchio.done.viewmodel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import com.robertovecchio.done.model.database.DoneDatabase
 import com.robertovecchio.done.model.entity.Tag
 import com.robertovecchio.done.model.entity.Task
 import com.robertovecchio.done.model.entity.User
 import com.robertovecchio.done.model.repository.RepositoryApi
+import javax.inject.Inject
 
-class HomeViewModel constructor(application: Application): AndroidViewModel(application) {
+class HomeViewModel @Inject constructor(application: Application): ViewModel() {
 
     private val mRepositoryApi: RepositoryApi = RepositoryApi(application)
-    private val mAllTask:LiveData<List<Task>>?
+    private val mAllTask: LiveData<List<Task>>?
 
     init {
 
@@ -28,5 +30,10 @@ class HomeViewModel constructor(application: Application): AndroidViewModel(appl
 
     fun insertTags(tags:List<Tag>){
         mRepositoryApi.insertTags(tags)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        DoneDatabase.destroyInstance()
     }
 }

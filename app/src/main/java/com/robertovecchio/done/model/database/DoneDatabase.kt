@@ -1,9 +1,9 @@
 package com.robertovecchio.done.model.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.robertovecchio.done.model.dao.DaoAccess
 import com.robertovecchio.done.model.entity.Tag
 import com.robertovecchio.done.model.entity.Task

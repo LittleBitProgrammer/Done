@@ -4,13 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import com.robertovecchio.done.R
 import com.robertovecchio.done.view.anko.splash.SplashLayout
 import org.jetbrains.anko.AnkoContext
@@ -37,7 +38,7 @@ class SplashScreen: AppCompatActivity() {
 
          mainUI = SplashLayout()
 
-         viewUi = mainUI.createView(AnkoContext.create(ctx,this))
+         viewUi = mainUI.createView(AnkoContext.create(this,this))
 
          centralLogo = mainUI.image
          textPowered = mainUI.powered
@@ -89,9 +90,12 @@ class SplashScreen: AppCompatActivity() {
                         if (isFirstRun){
                             startActivity(Intent(this@SplashScreen, Subscribe::class.java))
                             overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+                            Log.i("PRIMA RUN", "TRUE")
                         }else{
                             startActivity(Intent(this@SplashScreen, MainActivity::class.java))
                             overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+                            Log.i("PRIMA RUN", "FALSE")
+                            Log.i("PRIMA RUN", isFirstRun.toString())
                         }
                     },50)
                 }

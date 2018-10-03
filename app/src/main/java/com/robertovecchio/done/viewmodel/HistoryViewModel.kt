@@ -1,6 +1,6 @@
 package com.robertovecchio.done.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 class HistoryViewModel: ViewModel() {
 }

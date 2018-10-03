@@ -1,9 +1,9 @@
 package com.robertovecchio.done.view.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.ButterKnife
 import com.robertovecchio.done.model.entity.Task
 import com.robertovecchio.done.view.anko.adapter.TaskAdapterLayout

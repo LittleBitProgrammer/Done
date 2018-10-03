@@ -1,15 +1,13 @@
 package com.robertovecchio.done.view.fragment.subscribe
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.robertovecchio.done.view.anko.subscribe.pages.ImageChooserLayout
 import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.support.v4.act
-import org.jetbrains.anko.support.v4.ctx
 
 class ImageChooser: Fragment() {
 
@@ -19,9 +17,9 @@ class ImageChooser: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        mainUI = ImageChooserLayout(act)
+        mainUI = ImageChooserLayout(activity!!)
 
-        viewUI = mainUI.createView(AnkoContext.create(ctx,this))
+        viewUI = mainUI.createView(AnkoContext.create(context!!,this))
 
         _roundimage = mainUI.profileImage
 

@@ -16,33 +16,9 @@ import org.jetbrains.anko.AnkoContext
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module(includes = [ContextModule::class, EntityModule::class])
+@Module(includes = [ContextModule::class, EntityModule::class, FragmentModule::class, LayoutModule::class])
 
 class AnkoModule{
-
-    @Singleton
-    @Provides
-    fun provideHomeFragment(): HomeFragment{
-        return HomeFragment()
-    }
-
-    @Singleton
-    @Provides
-    fun provideHomeLayout(): HomeLayout{
-        return HomeLayout()
-    }
-
-    @Singleton
-    @Provides
-    fun provideAddFragment(): AddFragment{
-        return AddFragment()
-    }
-
-    @Singleton
-    @Provides
-    fun provideAddLayout(): AddLayout{
-        return AddLayout()
-    }
 
     @Singleton
     @Provides
@@ -80,5 +56,4 @@ class AnkoModule{
     fun provideRecyclerView(addLayout: AddLayout): RecyclerView {
         return addLayout.tagRecycler
     }
-
 }

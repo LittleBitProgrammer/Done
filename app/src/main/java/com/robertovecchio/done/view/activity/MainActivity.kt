@@ -14,12 +14,19 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.robertovecchio.done.R
+import com.robertovecchio.done.model.component.DaggerDoneComponent
 import com.robertovecchio.done.model.general.or
 import com.robertovecchio.done.model.interfaces.OnReselectedDelegate
+import com.robertovecchio.done.model.module.ActivityModule
+import com.robertovecchio.done.model.module.AnkoModule
+import com.robertovecchio.done.model.module.ContextModule
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.act
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.act
+import org.jetbrains.anko.support.v4.ctx
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
